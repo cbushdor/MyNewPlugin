@@ -2,9 +2,9 @@
 * Created By : sdo
 * File Name : README.md
 * Creation Date :2024-04-24 00:11:22
-* Last Modified : 2024-04-24 00:31:54
+* Last Modified : 2024-04-24 00:54:22
 * Email Address : cbushdor@laposte.net
-* Version : 0.0.0.14
+* Version : 0.0.0.17
 * License : 
 * 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 * 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -14,7 +14,7 @@
 [![License: CC BY-NC 3.0](https://img.shields.io/badge/License-CC_BY--NC_3.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/3.0/)
 
 # MyNewPlugin
-This plugin is there to help testing MaCoLib plugin...
+This plugin is there to help testing [MaCoLib](https://github.com/cbushdor/MaCoLib) plugin...
 
 # Technical requirements
 
