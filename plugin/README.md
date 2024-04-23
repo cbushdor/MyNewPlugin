@@ -2,9 +2,9 @@
 * Created By : sdo
 * File Name : README.md
 * Creation Date :2024-04-24 00:11:22
-* Last Modified : 2024-04-24 00:26:35
+* Last Modified : 2024-04-24 00:31:54
 * Email Address : cbushdor@laposte.net
-* Version : 0.0.0.11
+* Version : 0.0.0.14
 * License : 
 * 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 * 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -50,6 +50,15 @@ call plug#end()
 and plugin will be installed in *~/.vim/plugged* if everything is well configured. First, go in vim type *:PlugInstall* and look plugin is installing itself.
 
 # How to use it
+
+If you open a file in ~/Downloads s.a:
+
+```
+cd ~/Downloads
+vi file.txt
+```
+
+you should have something on the screen!
 
 # Watchout
 
