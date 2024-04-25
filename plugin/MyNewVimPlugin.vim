@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-04-25 23:40:28
+" Last Modified : 2024-04-25 23:50:46
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.397
+" Version : 0.0.0.398
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -40,7 +40,7 @@ function! TryColors(...)
                \ 	[
                \ 		"Hello from l:obj.addHeapStringColor\n",
                \ 		':hi MyColor  term=bold ctermfg=Yellow guifg=#80a0ff gui=bold',
-               \ 		g:MACOLIB_PRINT
+               \ 		g:MACOLIB_PROMPT
                \ 	])
       echo l:obj.prints_and_prompts()
       while (l:obj.isEmptyStackStringColor() != v:true)
