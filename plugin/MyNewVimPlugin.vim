@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-04-24 06:08:59
+" Last Modified : 2024-04-25 23:40:28
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.396
+" Version : 0.0.0.397
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -30,16 +30,12 @@ function! TryColors(...)
                \               ["Hello everybody DarkYellow\n", ':highlight MyColor ctermfg=darkgreen guifg=darkgreen',g:MACOLIB_PRINT]
                \           ],
                \)
-      "echo l:obj.prints_and_prompts()
-      "echo "\n\niiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii\n"
       call l:obj.addStackStringColor(
                \ 	[
                \ 		"Hello from l:obj.addStackStringColor\n",
                \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
                \ 		g:MACOLIB_PRINT
                \ 	])
-      "echo l:obj.prints_and_prompts()
-      echo "\n\nkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n"
       call l:obj.addHeapStringColor(
                \ 	[
                \ 		"Hello from l:obj.addHeapStringColor\n",
