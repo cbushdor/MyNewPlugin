@@ -16,4 +16,5 @@
 /blib
 /cover_db
 .DS_Store
-.*.vim.sw*
+.MyNewVimPlugin.vim.*
+#throw#
