@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-10 00:22:26
+" Last Modified : 2024-05-19 20:45:41
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.547
+" Version : 0.0.0.567
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -56,10 +56,11 @@ function! TryColors(...)
          echo l:obj.say()
          echo l:obj.prompt()
       catch /Nothing to prompt.*/
-         echo "Reached " .. string(obj.checks_prints_and_prompts()).."\n"
+         echo "Error catched: "..v:exception
+         echo "We print cause of error: " .. string(obj.checks_prints_and_prompts()).."\n"
          call l:obj.addStackStringColor(
                   \ 	[
-                  \ 		"Exception/error catched ===>" .. v:exception .. "\n",
+                  \ 		"We add another string this time its error " .. v:exception .. "\n",
                   \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
                   \ 		g:func_print_col.MACOLIB_PROMPT
                   \ 	])
@@ -68,11 +69,39 @@ function! TryColors(...)
          echo l:obj.prompt()
       finally
          echo "We continue"
+         try
+            call l:obj.clearStringColor()
+            call l:obj.clearStringColor()
+         catch /Nothing to clean.*/
+            echo "Error catched: "..v:exception
+         finally
+            call l:obj.addStackStringColor(
+                     \ 	[
+                     \ 		"Exception/error catched ===>" .. v:exception .. "\n",
+                     \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
+                     \ 		g:func_print_col.MACOLIB_PROMPT
+                     \ 	])
+            try
+               echo "Reached " .. string(obj.checks_prints_and_prompts()) .. "\n"
+               let elem = obj.removeStackStringColor()
+               echo "Reached " .. string(obj.checks_prints_and_prompts()) .. "\n"
+               echo "Element removed from stack "..string(elem).."\n"
+               let elem = obj.removeStackStringColor()
+            catch /Stack is empty.*/
+               echo "Error catched: "..v:exception
+               call l:obj.addStackStringColor(
+                        \ 	[
+                        \ 		"We enter new string when exception catched " .. v:exception .. "\n",
+                        \ 		':hi MyColor  term=bold ctermfg=DarkBlue guifg=#80a0ff gui=bold',
+                        \ 		g:func_print_col.MACOLIB_PRINT
+                        \ 	])
+            endtry
+         endtry
       endtry
       while (l:obj.isEmptyStackStringColor() != v:true)
          echo "\n\n**********************************************\n"
          let l:u = l:obj.removeStackStringColor()
-         echo "\n\nThis was removed from staack: "..string(l:u).."\n"
+         echo "\n\nWithin loop -> This was removed from staack: "..string(l:u).."\n"
       endwhile
    catch /MaCoLib:.*/
       echo "Error catch from catch MyNewVimPlugin: "..v:exception
