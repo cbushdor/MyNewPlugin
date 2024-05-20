@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-21 00:57:00
+" Last Modified : 2024-05-21 01:00:33
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.586
+" Version : 0.0.0.588
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -99,7 +99,7 @@ function! TryColors(...)
                      \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
                      \ 		g:func_print_col.MACOLIB_PROMPT
                      \ 	])
-            echo "Reached " .. string(obj.checks_prints_and_prompts()) .. "\n"
+            echo "Read stack values: " .. string(obj.checks_prints_and_prompts()) .. "\n"
             call s:removeStackStringColor(obj)
          endtry
       endtry
