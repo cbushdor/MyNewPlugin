@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-21 00:49:19
+" Last Modified : 2024-05-21 00:57:00
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.579
+" Version : 0.0.0.586
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -12,6 +12,23 @@
 "  Only works if file *.txt olnly for test purpose
 " 	>breakadd function TryColors
 " ------------------------------------------------------
+
+function s:removeStackStringColor(obj)
+   try
+      let l:elem = a:obj.removeStackStringColor()
+      echo "Reached " .. string(a:obj.checks_prints_and_prompts()) .. "\n"
+      echo "Element removed from stack "..string(l:elem).."\n"
+   catch /Stack is empty.*/
+      echo "Error catched: "..v:exception
+      call l:obj.addStackStringColor(
+               \ 	[
+               \ 		"We enter new string when exception catched " .. v:exception .. "\n",
+               \ 		':hi MyColor  term=bold ctermfg=DarkBlue guifg=#80a0ff gui=bold',
+               \ 		g:func_print_col.MACOLIB_PRINT
+               \ 	])
+   endtry
+endfunction
+
 
 function! TryColors(...)
    try
@@ -82,21 +99,8 @@ function! TryColors(...)
                      \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
                      \ 		g:func_print_col.MACOLIB_PROMPT
                      \ 	])
-            try
-               echo "Reached " .. string(obj.checks_prints_and_prompts()) .. "\n"
-               let elem = obj.removeStackStringColor()
-               echo "Reached " .. string(obj.checks_prints_and_prompts()) .. "\n"
-               echo "Element removed from stack "..string(elem).."\n"
-               let elem = obj.removeStackStringColor()
-            catch /Stack is empty.*/
-               echo "Error catched: "..v:exception
-               call l:obj.addStackStringColor(
-                        \ 	[
-                        \ 		"We enter new string when exception catched " .. v:exception .. "\n",
-                        \ 		':hi MyColor  term=bold ctermfg=DarkBlue guifg=#80a0ff gui=bold',
-                        \ 		g:func_print_col.MACOLIB_PRINT
-                        \ 	])
-            endtry
+            echo "Reached " .. string(obj.checks_prints_and_prompts()) .. "\n"
+            call s:removeStackStringColor(obj)
          endtry
       endtry
       while (l:obj.isEmptyStackStringColor() != v:true)
