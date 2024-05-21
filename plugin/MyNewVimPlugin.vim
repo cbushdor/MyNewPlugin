@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-21 20:31:59
+" Last Modified : 2024-05-21 20:42:56
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.600
+" Version : 0.0.0.605
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -93,10 +93,15 @@ function! TryColors(...)
          echo l:obj.say()
          echo l:obj.prompt()
       finally
-         echo "We continue"
+         echo "We continue before s:clearStringColor(obj)"
 
+         if (s:clearStringColor(obj) == v:false)
+            echo "-----> Stack not empty\n"
          call s:clearStringColor(obj)
-         call s:clearStringColor(obj)
+         else
+            echo "-----> Stack empty "..
+                     \         string(obj.checks_prints_and_prompts()).."\n"
+         endif
 
          call l:obj.addStackStringColor(
                   \ 	[
