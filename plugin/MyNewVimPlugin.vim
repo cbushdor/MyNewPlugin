@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-21 23:02:19
+" Last Modified : 2024-05-22 00:14:40
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.647
+" Version : 0.0.0.657
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -40,6 +40,14 @@ function s:addStackStringColor(obj,col)
    endtry
 endfunction
 
+function! s:checks_prints_and_prompts(obj)
+   try
+      return string(a:obj.checks_prints_and_prompts()
+   catch /.*/
+      echo "Error catched ".. v:exception.."\n"
+   endtry
+endfunction
+
 function s:clearStringColor(obj)
    try
       return a:obj.clearStringColor()
@@ -61,50 +69,45 @@ function! TryColors(...)
                \               ["Hello color 2 DarkYellow [constructor]", ':highlight MyColor ctermfg=darkgreen guifg=darkgreen',g:func_print_col.MACOLIB_PRINT]
                \           ]
                \)
-      try
-         echo "\n------>"..string(l:obj.checks_prints_and_prompts())
-         echo "===========================\n"
-      catch /.*/
-         echo "Error catched ".. v:exception.."\n"
-      endtry
+      call s:checks_prints_and_prompts(l:obj)
 
-      call s:addStackStringColor(obj,
+      call s:addStackStringColor(l:obj,
                \ 	[
                \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
                \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
                \ 		g:func_print_col.MACOLIB_PROMPT
                \ 	])
-      call s:addStackStringColor(obj,
+      call s:addStackStringColor(l:obj,
                \ 	[
                \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
                \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
                \ 		g:func_print_col.MACOLIB_PRINT
                \ 	])
-      call s:addStackStringColor(obj,
+      call s:addStackStringColor(l:obj,
                \ 	[
                \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
                \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
                \ 		g:func_print_col.MACOLIB_PRINT
                \ 	])
-      call s:addStackStringColor(obj,
+      call s:addStackStringColor(l:obj,
                \ 	[
                \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
                \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
                \ 		g:func_print_col.MACOLIB_PRINT
                \ 	])
-      call s:addStackStringColor(obj,
+      call s:addStackStringColor(l:obj,
                \ 	[
                \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
                \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
                \ 		g:func_print_col.MACOLIB_PRINT
                \ 	])
-      call s:addStackStringColor(obj,
+      call s:addStackStringColor(l:obj,
                \ 	[
                \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
                \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
                \ 		g:func_print_col.MACOLIB_PRINT
                \ 	])
-      call s:addStackStringColor(obj,
+      call s:addStackStringColor(l:obj,
                \ 	[
                \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
                \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
@@ -116,8 +119,8 @@ function! TryColors(...)
          echo l:obj.prompt()
       catch /Nothing to prompt.*/
          echo "Error catched: "..v:exception
-         echo "We print cause of error: " .. string(obj.checks_prints_and_prompts()).."\n"
-      call s:addStackStringColor(obj,
+         echo "We print cause of error: " .. string(l:obj.checks_prints_and_prompts()).."\n"
+         call s:addStackStringColor(l:obj,
                   \ 	[
                   \ 		"We add another prompt after error catched: " .. v:exception,
                   \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
@@ -134,23 +137,23 @@ function! TryColors(...)
             call s:clearStringColor(obj)
          else
             echo "-----> Stack empty "..
-                     \         string(obj.checks_prints_and_prompts()).."\n"
-            call s:clearStringColor(obj)
+                     \         string(l:obj.checks_prints_and_prompts()).."\n"
+            call s:clearStringColor(l:obj)
          endif
 
-      call s:addStackStringColor(obj,
+         call s:addStackStringColor(l:obj,
                   \ 	[
                   \ 		"Exception/error catched ===> " .. v:exception ,
                   \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
                   \ 		g:func_print_col.MACOLIB_PROMPT
                   \ 	])
-         echo "Read stack values: " .. string(obj.checks_prints_and_prompts()) .. "\n"
-         call s:removeStackStringColor(obj)
+         echo "Read stack values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
+         call s:removeStackStringColor(l:obj)
       endtry
       echo "\n\n****************\n"
       while (l:obj.isEmptyStackStringColor() != v:true)
          echo "\n\n**********************************************\n"
-         let l:u = s:removeStackStringColor(obj)
+         let l:u = s:removeStackStringColor(l:obj)
       endwhile
    catch /MaCoLib:.*/
       echo "Error catch from catch MyNewVimPlugin: "..v:exception
