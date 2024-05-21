@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-21 23:01:05
+" Last Modified : 2024-05-21 23:02:19
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.646
+" Version : 0.0.0.647
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -72,7 +72,7 @@ function! TryColors(...)
                \ 	[
                \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
                \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
-               \ 		g:func_print_col.MACOLIB_PRINT
+               \ 		g:func_print_col.MACOLIB_PROMPT
                \ 	])
       call s:addStackStringColor(obj,
                \ 	[
