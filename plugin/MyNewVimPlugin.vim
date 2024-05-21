@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-21 22:52:46
+" Last Modified : 2024-05-21 23:01:05
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.641
+" Version : 0.0.0.646
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -20,7 +20,7 @@ function s:removeStackStringColor(obj)
       echo "Element removed from stack "..string(l:elem).."\n"
    catch /Stack is empty.*/
       echo "Error catched: "..v:exception
-      call l:obj.addStackStringColor(
+      call s:addStackStringColor(obj,
                \ 	[
                \ 		"We enter new string when exception catched " .. v:exception .. "\n",
                \ 		':hi MyColor  term=bold ctermfg=DarkBlue guifg=#80a0ff gui=bold',
@@ -117,7 +117,7 @@ function! TryColors(...)
       catch /Nothing to prompt.*/
          echo "Error catched: "..v:exception
          echo "We print cause of error: " .. string(obj.checks_prints_and_prompts()).."\n"
-         call l:obj.addStackStringColor(
+      call s:addStackStringColor(obj,
                   \ 	[
                   \ 		"We add another prompt after error catched: " .. v:exception,
                   \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
@@ -138,7 +138,7 @@ function! TryColors(...)
             call s:clearStringColor(obj)
          endif
 
-         call l:obj.addStackStringColor(
+      call s:addStackStringColor(obj,
                   \ 	[
                   \ 		"Exception/error catched ===> " .. v:exception ,
                   \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
