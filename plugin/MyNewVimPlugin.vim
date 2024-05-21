@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-21 20:49:04
+" Last Modified : 2024-05-21 21:52:26
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.608
+" Version : 0.0.0.617
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -43,37 +43,19 @@ function! TryColors(...)
       " Read when in vim 
       " :help :highlight
 
-      " \               ["Test french touch\n",":hi comment ctermfg=darkgrey ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
+      " \               ["Hello color 1",":hi comment ctermfg=darkgrey ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
 
       let l:obj = MaCoLib#new(
-               \ 132,
+               \           10,
                \           [
-               \               ["Another test ",":hi comment ctermfg=grey ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
-               \               ["Hello everybody Brown ", ':hi MyColor  term=underline ctermfg=Brown guifg=#80a0ff',g:func_print_col.MACOLIB_PRINT],
-               \               ["Hello everybody DarkGrey ", ':hi MyNewColor  term=italic ctermfg=DarkGrey guifg=#80a0ff gui=bold',g:func_print_col.MACOLIB_PRINT],
-               \               ["Hello everybody Gray ", ':hi MyAddedColor  term=italic ctermfg=Gray guifg=#80a0ff gui=bold',g:func_print_col.MACOLIB_PRINT],
-               \               ["Hello everybody LightBlue ", ':hi MyColor  term=italic ctermfg=LightBlue guifg=#80a0ff gui=bold',g:func_print_col.MACOLIB_PRINT],
-               \               ["Hello everybody Blue ", ':hi MyColor  term=italic ctermfg=Blue guifg=#80a0ff gui=bold',g:func_print_col.MACOLIB_PRINT],
-               \               ["HeLLo everybody DarkBlue ", ':hi MyColor  term=italic ctermfg=DarkBlue guifg=#80a0ff gui=bold',g:func_print_col.MACOLIB_PRINT],
-               \               ["HeLLo everybody another print DarkRed ", ':hi MyColor  term=italic ctermfg=DarkRed guifg=#80a0ff gui=bold',g:func_print_col.MACOLIB_PRINT ],
-               \               ["HeLLo everybody another print Red ", ':hi MyColor  term=italic ctermfg=Red guifg=#80a0ff gui=bold',g:func_print_col.MACOLIB_PRINT ],
-               \               ["HeLLo everybody another prompt Red ", ':hi MyColor  term=italic ctermfg=Red guifg=#80a0ff gui=bold',g:func_print_col.MACOLIB_PRINT ],
-               \               ["HeLLo everybody another print Red ", ':hi MyColor  term=italic ctermfg=Red guifg=#80a0ff gui=bold',g:func_print_col.MACOLIB_PRINT ],
-               \               ["HeLLo everybody another print Red ", ':hi MyColor  term=italic ctermfg=Red guifg=#80a0ff gui=bold',g:func_print_col.MACOLIB_PRINT ],
-               \               ["HeLLo everybody another print DarkRed\n", ':hi MyColor  term=italic ctermfg=DarkRed guifg=#80a0ff gui=bold',g:func_print_col.MACOLIB_PRINT ],
-               \               ["Hello everybody DarkYellow\n", ':highlight MyColor ctermfg=darkgreen guifg=darkgreen',g:func_print_col.MACOLIB_PRINT]
+               \               ["Hello color 1 darkblue [constructor]",":hi MyCommet1 ctermfg=grey ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
+               \               ["Hello color 2 DarkYellow [constructor]", ':highlight MyColor ctermfg=darkgreen guifg=darkgreen',g:func_print_col.MACOLIB_PRINT]
                \           ]
                \)
       call l:obj.addStackStringColor(
                \ 	[
-               \ 		"Hello from l:obj.addStackStringColor",
-               \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
-               \ 		g:func_print_col.MACOLIB_PRINT
-               \ 	])
-      call l:obj.addHeapStringColor(
-               \ 	[
-               \ 		"Hello from l:obj.addHeapStringColor\n",
-               \ 		':hi MyColor  term=bold ctermfg=Yellow guifg=#80a0ff gui=bold',
+               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
+               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
                \ 		g:func_print_col.MACOLIB_PRINT
                \ 	])
       try
