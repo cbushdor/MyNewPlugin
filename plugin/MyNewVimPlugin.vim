@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-21 21:52:26
+" Last Modified : 2024-05-21 22:52:46
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.617
+" Version : 0.0.0.641
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -29,6 +29,17 @@ function s:removeStackStringColor(obj)
    endtry
 endfunction
 
+function s:addStackStringColor(obj,col)
+   try
+      echo "Adding: "..string(a:col).."\n"
+      call a:obj.addStackStringColor(a:col)
+   catch /Max size reached.*/
+      echo "Error "..v:exception.."\n"
+   catch /Error detected in the nuplet format:.*/
+      echo v:exception.."\n"
+   endtry
+endfunction
+
 function s:clearStringColor(obj)
    try
       return a:obj.clearStringColor()
@@ -43,16 +54,57 @@ function! TryColors(...)
       " Read when in vim 
       " :help :highlight
 
-      " \               ["Hello color 1",":hi comment ctermfg=darkgrey ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
-
       let l:obj = MaCoLib#new(
-               \           10,
+               \           4,
                \           [
                \               ["Hello color 1 darkblue [constructor]",":hi MyCommet1 ctermfg=grey ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
                \               ["Hello color 2 DarkYellow [constructor]", ':highlight MyColor ctermfg=darkgreen guifg=darkgreen',g:func_print_col.MACOLIB_PRINT]
                \           ]
                \)
-      call l:obj.addStackStringColor(
+      try
+         echo "\n------>"..string(l:obj.checks_prints_and_prompts())
+         echo "===========================\n"
+      catch /.*/
+         echo "Error catched ".. v:exception.."\n"
+      endtry
+
+      call s:addStackStringColor(obj,
+               \ 	[
+               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
+               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
+               \ 		g:func_print_col.MACOLIB_PRINT
+               \ 	])
+      call s:addStackStringColor(obj,
+               \ 	[
+               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
+               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
+               \ 		g:func_print_col.MACOLIB_PRINT
+               \ 	])
+      call s:addStackStringColor(obj,
+               \ 	[
+               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
+               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
+               \ 		g:func_print_col.MACOLIB_PRINT
+               \ 	])
+      call s:addStackStringColor(obj,
+               \ 	[
+               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
+               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
+               \ 		g:func_print_col.MACOLIB_PRINT
+               \ 	])
+      call s:addStackStringColor(obj,
+               \ 	[
+               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
+               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
+               \ 		g:func_print_col.MACOLIB_PRINT
+               \ 	])
+      call s:addStackStringColor(obj,
+               \ 	[
+               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
+               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
+               \ 		g:func_print_col.MACOLIB_PRINT
+               \ 	])
+      call s:addStackStringColor(obj,
                \ 	[
                \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
                \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
