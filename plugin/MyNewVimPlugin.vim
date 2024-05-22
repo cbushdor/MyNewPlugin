@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-22 00:14:40
+" Last Modified : 2024-05-22 23:04:19
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.657
+" Version : 0.0.0.673
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -20,12 +20,6 @@ function s:removeStackStringColor(obj)
       echo "Element removed from stack "..string(l:elem).."\n"
    catch /Stack is empty.*/
       echo "Error catched: "..v:exception
-      call s:addStackStringColor(obj,
-               \ 	[
-               \ 		"We enter new string when exception catched " .. v:exception .. "\n",
-               \ 		':hi MyColor  term=bold ctermfg=DarkBlue guifg=#80a0ff gui=bold',
-               \ 		g:func_print_col.MACOLIB_PRINT
-               \ 	])
    endtry
 endfunction
 
@@ -42,7 +36,7 @@ endfunction
 
 function! s:checks_prints_and_prompts(obj)
    try
-      return string(a:obj.checks_prints_and_prompts()
+      return string(a:obj.checks_prints_and_prompts())
    catch /.*/
       echo "Error catched ".. v:exception.."\n"
    endtry
@@ -62,61 +56,61 @@ function! TryColors(...)
       " Read when in vim 
       " :help :highlight
 
-      let l:obj = MaCoLib#new(
-               \           4,
-               \           [
-               \               ["Hello color 1 darkblue [constructor]",":hi MyCommet1 ctermfg=grey ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
-               \               ["Hello color 2 DarkYellow [constructor]", ':highlight MyColor ctermfg=darkgreen guifg=darkgreen',g:func_print_col.MACOLIB_PRINT]
-               \           ]
-               \)
-      call s:checks_prints_and_prompts(l:obj)
-
-      call s:addStackStringColor(l:obj,
-               \ 	[
-               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
-               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
-               \ 		g:func_print_col.MACOLIB_PROMPT
-               \ 	])
-      call s:addStackStringColor(l:obj,
-               \ 	[
-               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
-               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
-               \ 		g:func_print_col.MACOLIB_PRINT
-               \ 	])
-      call s:addStackStringColor(l:obj,
-               \ 	[
-               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
-               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
-               \ 		g:func_print_col.MACOLIB_PRINT
-               \ 	])
-      call s:addStackStringColor(l:obj,
-               \ 	[
-               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
-               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
-               \ 		g:func_print_col.MACOLIB_PRINT
-               \ 	])
-      call s:addStackStringColor(l:obj,
-               \ 	[
-               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
-               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
-               \ 		g:func_print_col.MACOLIB_PRINT
-               \ 	])
-      call s:addStackStringColor(l:obj,
-               \ 	[
-               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
-               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
-               \ 		g:func_print_col.MACOLIB_PRINT
-               \ 	])
-      call s:addStackStringColor(l:obj,
-               \ 	[
-               \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
-               \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
-               \ 		g:func_print_col.MACOLIB_PRINT
-               \ 	])
       try
+         let l:obj = MaCoLib#new(
+                  \           4,
+                  \           [
+                  \               ["Hello color 1 darkblue [constructor]",":hi MyCommet1 ctermfg=grey ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
+                  \               ["Hello color 2 DarkYellow [constructor]", ':highlight MyColor ctermfg=darkgreen guifg=darkgreen',g:func_print_col.MACOLIB_PRINT]
+                  \           ]
+                  \)
+         call s:checks_prints_and_prompts(l:obj)
+
+         call s:addStackStringColor(l:obj,
+                  \ 	[
+                  \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
+                  \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
+                  \ 		g:func_print_col.MACOLIB_PROMPT
+                  \ 	])
+         call s:addStackStringColor(l:obj,
+                  \ 	[
+                  \ 		"Hello color 4 DarkBlue [obj.addStackStringColor()]",
+                  \ 		':hi MyColor  term=bold ctermfg=DarkBlue guifg=#80a0ff gui=bold',
+                  \ 		g:func_print_col.MACOLIB_PRINT
+                  \ 	])
+         call s:addStackStringColor(l:obj,
+                  \ 	[
+                  \ 		"Hello color 5 DarkYellow [obj.addStackStringColor()]",
+                  \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
+                  \ 		g:func_print_col.MACOLIB_PRINT
+                  \ 	])
+         call s:addStackStringColor(l:obj,
+                  \ 	[
+                  \ 		"Hello color 5 LighRed [obj.addStackStringColor()]",
+                  \ 		':hi MyColor  term=bold ctermfg=LightRed guifg=#80a0ff gui=bold',
+                  \ 		g:func_print_col.MACOLIB_PRINT
+                  \ 	])
+         call s:addStackStringColor(l:obj,
+                  \ 	[
+                  \ 		"Hello color 6 LightYellow [obj.addStackStringColor()]",
+                  \ 		':hi MyColor  term=bold ctermfg=LightYellow guifg=#80a0ff gui=bold',
+                  \ 		g:func_print_col.MACOLIB_PRINT
+                  \ 	])
+         call s:addStackStringColor(l:obj,
+                  \ 	[
+                  \ 		"Hello color 7 Red [obj.addStackStringColor()]",
+                  \ 		':hi MyColor  term=bold ctermfg=Red guifg=#80a0ff gui=bold',
+                  \ 		g:func_print_col.MACOLIB_PRINT
+                  \ 	])
+         call s:addStackStringColor(l:obj,
+                  \ 	[
+                  \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
+                  \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
+                  \ 		g:func_print_col.MACOLIB_PRINT
+                  \ 	])
          echo l:obj.prints_and_prompts()
-         echo l:obj.say()
-         echo l:obj.prompt()
+      "   echo l:obj.say()
+      "   echo l:obj.prompt()
       catch /Nothing to prompt.*/
          echo "Error catched: "..v:exception
          echo "We print cause of error: " .. string(l:obj.checks_prints_and_prompts()).."\n"
@@ -149,10 +143,17 @@ function! TryColors(...)
                   \ 	])
          echo "Read stack values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
          call s:removeStackStringColor(l:obj)
+         call s:addStackStringColor(obj,
+                  \ 	[
+                  \ 		"We enter new string when exception catched " .. v:exception .. "\n",
+                  \ 		':hi MyColor  term=bold ctermfg=DarkBlue guifg=#80a0ff gui=bold',
+                  \ 		g:func_print_col.MACOLIB_PRINT
+                  \ 	])
       endtry
-      echo "\n\n****************\n"
+      echo "\n********************\n"
+      echo "***CLEANING STACK***\n"
+      echo "********************\n"
       while (l:obj.isEmptyStackStringColor() != v:true)
-         echo "\n\n**********************************************\n"
          let l:u = s:removeStackStringColor(l:obj)
       endwhile
    catch /MaCoLib:.*/
