@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-22 23:04:19
+" Last Modified : 2024-05-23 04:41:47
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.673
+" Version : 0.0.0.694
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -58,9 +58,9 @@ function! TryColors(...)
 
       try
          let l:obj = MaCoLib#new(
-                  \           4,
+                  \           24,
                   \           [
-                  \               ["Hello color 1 darkblue [constructor]",":hi MyCommet1 ctermfg=grey ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
+                  \               ["Hello color 1 Red [constructor]",":hi MyCommet1 ctermfg=Red ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
                   \               ["Hello color 2 DarkYellow [constructor]", ':highlight MyColor ctermfg=darkgreen guifg=darkgreen',g:func_print_col.MACOLIB_PRINT]
                   \           ]
                   \)
@@ -104,16 +104,17 @@ function! TryColors(...)
                   \ 	])
          call s:addStackStringColor(l:obj,
                   \ 	[
-                  \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
-                  \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
+                  \ 		"\nHello color 3 Red & Blue [obj.addStackStringColor()]\n==========\n\n",
+                  \ 		':hi MyColor  term=bold guifg=Red guibg=Blue gui=bold',
                   \ 		g:func_print_col.MACOLIB_PRINT
                   \ 	])
          echo l:obj.prints_and_prompts()
       "   echo l:obj.say()
       "   echo l:obj.prompt()
       catch /Nothing to prompt.*/
-         echo "Error catched: "..v:exception
+         echo "Error catched: "..v:exception .. "\n"
          echo "We print cause of error: " .. string(l:obj.checks_prints_and_prompts()).."\n"
+         echo "We fill stack...\n"
          call s:addStackStringColor(l:obj,
                   \ 	[
                   \ 		"We add another prompt after error catched: " .. v:exception,
