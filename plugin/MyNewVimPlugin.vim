@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-23 04:41:47
+" Last Modified : 2024-05-24 23:53:00
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.694
+" Version : 0.0.0.698
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -108,7 +108,7 @@ function! TryColors(...)
                   \ 		':hi MyColor  term=bold guifg=Red guibg=Blue gui=bold',
                   \ 		g:func_print_col.MACOLIB_PRINT
                   \ 	])
-         echo l:obj.prints_and_prompts()
+         echo "::::::::>" .. string(l:obj.prints_and_prompts())
       "   echo l:obj.say()
       "   echo l:obj.prompt()
       catch /Nothing to prompt.*/
@@ -121,13 +121,18 @@ function! TryColors(...)
                   \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
                   \ 		g:func_print_col.MACOLIB_PROMPT
                   \ 	])
-         echo "Reached " .. string(obj.checks_prints_and_prompts()) .. "\n"
+         echo "Reached " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
          echo l:obj.say()
          echo l:obj.prompt()
       finally
-         echo "We continue before s:clearStringColor(obj)"
+         echo "We continue before s:clearStringColor(l:obj)"
 
-         if (s:clearStringColor(obj) == v:false)
+         if (s:clearStringColor(l:obj) == v:false)
+            if obj.isEmptyStackStringColor() == v:true
+               echo "\n\n\nIt is empty\n\n\n"
+            else
+               echo "\n\n\nIt is not empty\n\n\n"
+            endif
             echo "-----> Stack not empty\n"
             call s:clearStringColor(obj)
          else
