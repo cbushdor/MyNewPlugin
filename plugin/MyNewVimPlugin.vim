@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-24 23:53:00
+" Last Modified : 2024-05-25 00:03:38
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.698
+" Version : 0.0.0.704
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -44,6 +44,7 @@ endfunction
 
 function s:clearStringColor(obj)
    try
+      echo "***********************>We try to clean the stack...\n"
       return a:obj.clearStringColor()
    catch /Nothing to clean.*/
       echo "Error catched: "..v:exception
@@ -127,12 +128,14 @@ function! TryColors(...)
       finally
          echo "We continue before s:clearStringColor(l:obj)"
 
+         if obj.isEmptyStackStringColor() == v:true
+            echo "\n\n\n*******************>It is empty "..
+                     \         string(l:obj.checks_prints_and_prompts()).."\n"
+         else
+            echo "\n\n\n*******************>It is not empty "..
+                     \         string(l:obj.checks_prints_and_prompts()).."\n"
+         endif
          if (s:clearStringColor(l:obj) == v:false)
-            if obj.isEmptyStackStringColor() == v:true
-               echo "\n\n\nIt is empty\n\n\n"
-            else
-               echo "\n\n\nIt is not empty\n\n\n"
-            endif
             echo "-----> Stack not empty\n"
             call s:clearStringColor(obj)
          else
