@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-25 01:27:12
+" Last Modified : 2024-05-26 18:58:17
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.710
+" Version : 0.0.0.714
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -139,9 +139,20 @@ function! TryColors(...)
             echo "-----> Stack not empty\n"
             call s:clearStringColor(obj)
          else
-            echo "-----> Stack empty "..
+            echo "X-----> Stack empty "..
                      \         string(l:obj.checks_prints_and_prompts()).."\n"
-            call s:clearStringColor(l:obj)
+            try
+               call s:clearStringColor(l:obj)
+            catch /.*/
+            finally
+               echo "Lets try to continue!!!!!"
+               call s:addStackStringColor(l:obj,
+                        \ 	[
+                        \ 		"Exception/error catched ===> " .. v:exception ,
+                        \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
+                        \ 		g:func_print_col.MACOLIB_PROMPT
+                        \ 	])
+            endtry
          endif
 
          if obj.isEmptyStackStringColor() == v:true
