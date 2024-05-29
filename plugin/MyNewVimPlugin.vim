@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-28 23:40:05
+" Last Modified : 2024-05-30 00:00:36
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.740
+" Version : 0.0.0.750
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -152,10 +152,11 @@ function! TryColors(...)
                         \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
                         \ 		g:func_print_col.MACOLIB_PROMPT
                         \ 	])
+               echo "Passed"
             endtry
          endif
 
-         if obj.isEmptyStackStringColor() == v:true
+         if l:obj.isEmptyStackStringColor() == v:true
             echo "\n\n\n========================>It is empty "..
                      \         string(l:obj.checks_prints_and_prompts()).."\n"
          else
@@ -190,12 +191,12 @@ function! TryColors(...)
       while (l:obj.isEmptyStackStringColor() != v:true)
          let l:u = s:removeStackStringColor(l:obj)
       endwhile
-      let i = 0
       try
+         let i = 0
          while i < 40
             call l:obj.addHeapStringColor(
                      \ [
-                     \ 		i .. ". We enter new string when exception catched " .. v:exception .. "\n",
+                     \ 		i .. ". We enter new string when HEAP tested\n",
                      \ 		':hi MyColor  term=bold ctermfg=DarkBlue guifg=#80a0ff gui=bold',
                      \ 		g:func_print_col.MACOLIB_PRINT
                      \ ]
@@ -205,6 +206,30 @@ function! TryColors(...)
             call l:obj.prints_and_prompts()
             echo "=============END HEAP=====-====================\n"
             echo "===============================================\n"
+            let i += 1
+         endwhile
+      catch /.*/
+         echo "Error "..v:exception
+         echo "Read stack values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
+         call l:obj.clearStringColor()
+         echo "Read stack values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
+      endtry
+
+      try
+         let i = 0
+         while i < 40
+            call l:obj.addStackStringColor(
+                     \ [
+                     \ 		i .. ". We enter new string when STACK tested\n",
+                     \ 		':hi MyColor  term=italic ctermfg=DarkGrey guifg=#80a0ff gui=italic',
+                     \ 		g:func_print_col.MACOLIB_PRINT
+                     \ ]
+                     \)
+            echo "==============================================\n"
+            echo "=============STACK============================\n"
+            call l:obj.prints_and_prompts()
+            echo "=============END STACK===-====================\n"
+            echo "==============================================\n"
             let i += 1
          endwhile
       catch /.*/
