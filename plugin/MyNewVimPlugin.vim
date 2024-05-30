@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-30 00:00:36
+" Last Modified : 2024-05-31 01:29:57
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.750
+" Version : 0.0.0.758
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -211,6 +211,9 @@ function! TryColors(...)
       catch /.*/
          echo "Error "..v:exception
          echo "Read stack values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
+         let l:elem = l:obj.removeStackStringColor()
+         echo "#######>Element removed from stack: "..string(l:elem).."\n"
+         echo "Read stack values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
          call l:obj.clearStringColor()
          echo "Read stack values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
       endtry
@@ -234,9 +237,12 @@ function! TryColors(...)
          endwhile
       catch /.*/
          echo "Error "..v:exception
-         echo "Read stack values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
+         echo "Read heap values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
+         let l:elem = l:obj.removeHeapStringColor()
+         echo "#######>Element removed from heap: "..string(l:elem).."\n"
+         echo "Read heap values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
          call l:obj.clearStringColor()
-         echo "Read stack values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
+         echo "Read heap values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
       endtry
 
    catch /MaCoLib:.*/
@@ -248,11 +254,11 @@ endfunction
 
 try
    " We call function TryColors() when BufNewFile.
-   autocmd BufNewFile *.txt execute ":call TryColors()"
+   autocmd BufNewFile *.{c,c++,txt} execute ":call TryColors()"
 
    " We call function TryColors() when BufReadFile.
    " Interruption managed here (first test see call Stop() bellow)
-   autocmd BufRead *.txt execute "
+   autocmd BufRead *.{c,c++,txt} execute "
             \:try
             \|    call TryColors()
             \|catch /.*/
