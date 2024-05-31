@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-31 01:29:57
+" Last Modified : 2024-05-31 22:53:17
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.758
+" Version : 0.0.0.761
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -191,6 +191,10 @@ function! TryColors(...)
       while (l:obj.isEmptyStackStringColor() != v:true)
          let l:u = s:removeStackStringColor(l:obj)
       endwhile
+      echo "*===============================================================*\n"
+      echo "* TESTS REGARDING STACKS ARE OVER BUT THEY WILL RETURN SOON     *\n"
+      echo "* NOW PROCEDURE FOR TESTING HEAP                                *\n"
+      echo "*===============================================================*\n"
       try
          let i = 0
          while i < 40
@@ -218,6 +222,10 @@ function! TryColors(...)
          echo "Read stack values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
       endtry
 
+      echo "*===============================================================*\n"
+      echo "* TESTS REGARDING HEAPS ARE OVER                                *\n"
+      echo "* NOW PROCEDURE FOR TESTING STACKS ARE BACK AGAIN               *\n"
+      echo "*===============================================================*\n"
       try
          let i = 0
          while i < 40
