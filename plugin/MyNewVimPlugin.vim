@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-05-31 22:53:17
+" Last Modified : 2024-06-27 22:40:57
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.761
+" Version : 0.0.0.782
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -29,6 +29,7 @@ function s:addStackStringColor(obj,col)
       call a:obj.addStackStringColor(a:col)
    catch /Max size reached.*/
       echo "Error "..v:exception.."\n"
+      throw v:exception
    catch /Error detected in the nuplet format:.*/
       echo v:exception.."\n"
    endtry
@@ -44,8 +45,8 @@ endfunction
 
 function s:clearStringColor(obj)
    try
-      echo "***********************>We try to clean the stack...\n"
-      return a:obj.clearStringColor()
+      echo "IIII***********************>We try to clean the stack...\n"
+      return a:obj.clearStringColor(expand('<script>'))
    catch /Nothing to clean.*/
       echo "Error catched: "..v:exception
    endtry
@@ -59,50 +60,63 @@ function! TryColors(...)
 
       try
          let l:obj = MaCoLib#new(
-                  \           16,
+                  \           4,
                   \           [
                   \               ["Hello color 1 Red [constructor]",":hi MyCommet1 ctermfg=Red ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
                   \               ["Hello color 2 DarkYellow [constructor]", ':highlight MyColor ctermfg=darkgreen guifg=darkgreen',g:func_print_col.MACOLIB_PRINT]
                   \           ]
                   \)
+         " We summup what's in stack!
          call s:checks_prints_and_prompts(l:obj)
 
+         " We add info in stack
          call s:addStackStringColor(l:obj,
                   \ 	[
                   \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
                   \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
-                  \ 		g:func_print_col.MACOLIB_PROMPT
+                  \ 		g:func_print_col.MACOLIB_PROMPTS
                   \ 	])
+         " We add info in stack
          call s:addStackStringColor(l:obj,
                   \ 	[
                   \ 		"Hello color 4 DarkBlue [obj.addStackStringColor()]",
                   \ 		':hi MyColor  term=bold ctermfg=DarkBlue guifg=#80a0ff gui=bold',
                   \ 		g:func_print_col.MACOLIB_PRINT
                   \ 	])
+
+         " We add info in stack
          call s:addStackStringColor(l:obj,
                   \ 	[
                   \ 		"Hello color 5 DarkYellow [obj.addStackStringColor()]",
                   \ 		':hi MyColor  term=bold ctermfg=DarkYellow guifg=#80a0ff gui=bold',
                   \ 		g:func_print_col.MACOLIB_PRINT
                   \ 	])
+
+         " We add info in stack
          call s:addStackStringColor(l:obj,
                   \ 	[
                   \ 		"Hello color 5 LighRed [obj.addStackStringColor()]",
                   \ 		':hi MyColor  term=bold ctermfg=LightRed guifg=#80a0ff gui=bold',
                   \ 		g:func_print_col.MACOLIB_PRINT
                   \ 	])
+
+         " We add info in stack
          call s:addStackStringColor(l:obj,
                   \ 	[
                   \ 		"Hello color 6 LightYellow [obj.addStackStringColor()]",
                   \ 		':hi MyColor  term=bold ctermfg=LightYellow guifg=#80a0ff gui=bold',
                   \ 		g:func_print_col.MACOLIB_PRINT
                   \ 	])
+
+         " We add info in stack
          call s:addStackStringColor(l:obj,
                   \ 	[
                   \ 		"Hello color 7 Red [obj.addStackStringColor()]",
                   \ 		':hi MyColor  term=bold ctermfg=Red guifg=#80a0ff gui=bold',
                   \ 		g:func_print_col.MACOLIB_PRINT
                   \ 	])
+
+         " We add info in stack
          call s:addStackStringColor(l:obj,
                   \ 	[
                   \ 		"\nHello color 3 Red & Blue [obj.addStackStringColor()]\n==========\n\n",
@@ -129,10 +143,10 @@ function! TryColors(...)
          echo "We continue before s:clearStringColor(l:obj)"
 
          if obj.isEmptyStackStringColor() == v:true
-            echo "\n\n\n========================>It is empty "..
+            echo "\n\n\n========================>It is empty\n"..
                      \         string(l:obj.checks_prints_and_prompts()).."\n"
          else
-            echo "\n\n\n========================>It is not empty "..
+            echo "\n\n\n========================>It is not empty here is its content\n"..
                      \         string(l:obj.checks_prints_and_prompts()).."\n"
          endif
          if (s:clearStringColor(l:obj) == v:false)
@@ -157,10 +171,10 @@ function! TryColors(...)
          endif
 
          if l:obj.isEmptyStackStringColor() == v:true
-            echo "\n\n\n========================>It is empty "..
+            echo "\n\n\n========================>It is empty\n"..
                      \         string(l:obj.checks_prints_and_prompts()).."\n"
          else
-            echo "\n\n\n========================>It is not empty "..
+            echo "\n\n\n========================>It is not empty here is its content\n"..
                      \         string(l:obj.checks_prints_and_prompts()).."\n"
          endif
          call s:addStackStringColor(l:obj,
@@ -170,10 +184,10 @@ function! TryColors(...)
                   \ 		g:func_print_col.MACOLIB_PROMPT
                   \ 	])
          if obj.isEmptyStackStringColor() == v:true
-            echo "\n\n\n========================>It is empty "..
+            echo "\n\n\n========================>It is empty\n"..
                      \         string(l:obj.checks_prints_and_prompts()).."\n"
          else
-            echo "\n\n\n========================>It is not empty "..
+            echo "\n\n\n========================>It is not empty here is its content\n"..
                      \         string(l:obj.checks_prints_and_prompts()).."\n"
          endif
          echo "Read stack values: " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
