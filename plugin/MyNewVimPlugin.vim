@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-06-28 23:05:44
+" Last Modified : 2024-06-29 03:26:12
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.803
+" Version : 0.0.0.836
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -48,6 +48,9 @@ function s:clearStringColor(obj)
       echo "IIII***********************>We try to clean the stack...\n"
       let l:path = expand('<script>')
       let l:path = split(l:path,'/')[len(split(l:path,'/'))-1]
+      echo "\n*************$>" .. l:path .. "\n"
+      let l:path = substitute(l:path,'\.[^\.]*','','')
+      echo "\n*************$>" .. l:path .. "\n"
       return a:obj.clearStringColor(l:path)
    catch /Nothing to clean.*/
       echo "Error catched: "..v:exception
