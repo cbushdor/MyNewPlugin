@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-06-29 04:03:27
+" Last Modified : 2024-07-03 00:39:48
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.840
+" Version : 0.0.0.887
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -19,7 +19,8 @@ function s:removeStackStringColor(obj)
       echo "Reached " .. string(a:obj.checks_prints_and_prompts()) .. "\n"
       echo "Element removed from stack "..string(l:elem).."\n"
    catch /Stack is empty.*/
-      echo "Error catched: "..v:exception
+               "call func()
+      echo "4 Error catched: "..v:exception
    endtry
 endfunction
 
@@ -39,7 +40,8 @@ function! s:checks_prints_and_prompts(obj)
    try
       return string(a:obj.checks_prints_and_prompts())
    catch /.*/
-      echo "Error catched ".. v:exception.."\n"
+               "call func()
+      echo "1 Error catched ".. v:exception.."\n"
    endtry
 endfunction
 
@@ -47,11 +49,11 @@ function s:clearStringColor(obj)
    try
       echo "IIII***********************>We try to clean the stack...\n"
       let l:path = expand('<script>')
-      let l:path = split(l:path,'/')[len(split(l:path,'/'))-1]
+      let l:path = split(l:path,'/')[len(split(l:path,'/'))-1] 
       " let l:path = substitute(l:path,'\..*$','','')
-      return a:obj.clearStringColor(l:path)
+      return a:obj.clearStringColor()
    catch /Nothing to clean.*/
-      echo "Error catched: "..v:exception
+      echo "2 Error catched: " .. v:exception
    endtry
 endfunction
 
@@ -130,7 +132,7 @@ function! TryColors(...)
       "   echo l:obj.say()
       "   echo l:obj.prompt()
       catch /Nothing to prompt.*/
-         echo "Error catched: "..v:exception .. "\n"
+         echo "3 Error catched: "..v:exception .. "\n"
          echo "We print cause of error: " .. string(l:obj.checks_prints_and_prompts()).."\n"
          echo "We fill stack...\n"
          call s:addStackStringColor(l:obj,
@@ -152,6 +154,7 @@ function! TryColors(...)
             echo "\n\n\n========================>It is not empty here is its content\n"..
                      \         string(l:obj.checks_prints_and_prompts()).."\n"
          endif
+         echo "********========>" .. line('.') .. "<++++++++++\n"
          if (s:clearStringColor(l:obj) == v:false)
             echo "-----> Stack not empty\n"
             call s:clearStringColor(obj)
@@ -159,6 +162,9 @@ function! TryColors(...)
             echo "X-----> Stack empty "..
                      \         string(l:obj.checks_prints_and_prompts()).."\n"
             try
+               echo "1IIIII********========>" .. line('.') .. "<++++++++++\n"
+               "call func()
+               echo "2IIIII********========>" .. line('.') .. "<++++++++++\n"
                call s:clearStringColor(l:obj)
             catch /.*/
             finally
