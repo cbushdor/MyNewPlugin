@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-07-03 00:39:48
+" Last Modified : 2024-07-04 00:42:12
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.887
+" Version : 0.0.0.895
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -29,10 +29,10 @@ function s:addStackStringColor(obj,col)
       echo "Adding: "..string(a:col).."\n"
       call a:obj.addStackStringColor(a:col)
    catch /Max size reached.*/
-      echo "Error "..v:exception.."\n"
+      "echo "Error "..v:exception.."\n"
       throw v:exception
    catch /Error detected in the nuplet format:.*/
-      echo v:exception.."\n"
+      echo v:exception .. "\n"
    endtry
 endfunction
 
@@ -65,7 +65,7 @@ function! TryColors(...)
 
       try
          let l:obj = MaCoLib#new(
-                  \           4,
+                  \           14,
                   \           [
                   \               ["Hello color 1 Red [constructor]",":hi MyCommet1 ctermfg=Red ctermbg=darkblue",g:func_print_col.MACOLIB_PRINT],
                   \               ["Hello color 2 DarkYellow [constructor]", ':highlight MyColor ctermfg=darkgreen guifg=darkgreen',g:func_print_col.MACOLIB_PRINT]
@@ -74,12 +74,13 @@ function! TryColors(...)
          " We summup what's in stack!
          call s:checks_prints_and_prompts(l:obj)
 
+         echo "\nWE TEST ERRROR\n"
          " We add info in stack
          call s:addStackStringColor(l:obj,
                   \ 	[
                   \ 		"Hello color 3 DarkRed [obj.addStackStringColor()]",
                   \ 		':hi MyColor  term=bold ctermfg=DarkRed guifg=#80a0ff gui=bold',
-                  \ 		g:func_print_col.MACOLIB_PROMPTS
+                  \ 		g:func_print_col.MACOLIB_PROMPT_
                   \ 	])
          " We add info in stack
          call s:addStackStringColor(l:obj,
@@ -144,6 +145,8 @@ function! TryColors(...)
          echo "Reached " .. string(l:obj.checks_prints_and_prompts()) .. "\n"
          echo l:obj.say()
          echo l:obj.prompt()
+      catch /Key not present in Dictionary:.*/
+         echo "Error with dictionary "..v:exception .. "<------\n"
       finally
          echo "We continue before s:clearStringColor(l:obj)"
 
