@@ -2,9 +2,9 @@
 " Created By : sdo
 " File Name : MyNewVimPlugin.vim
 " Creation Date : 2024-04-18 01:45:45
-" Last Modified : 2024-07-05 18:23:11
+" Last Modified : 2025-02-05 00:58:31
 " Email Address : cbushdor@laposte.net
-" Version : 0.0.0.908
+" Version : 0.0.0.909
 " License : 
 " 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
 " 	Unported License, which is available at http://creativecommons.org/licenses/by-nc/3.0/.
@@ -287,19 +287,19 @@ function! TryColors(...)
    endtry
 endfunction
 
-try
-   " We call function TryColors() when BufNewFile.
-   autocmd BufNewFile *.{c,c++,txt} execute ":call TryColors()"
-
-   " We call function TryColors() when BufReadFile.
-   " Interruption managed here (first test see call Stop() bellow)
-   autocmd BufRead *.{c,c++,txt} execute "
-            \:try
-            \|    call TryColors()
-            \|catch /.*/
-            \|    echo \"Stopping due to \" .. v:exception .. \"\n\"
-            \|    call Stop() 
-            \|endtry"
-catch /.*/
-   echo "errrrrrr"
-endtry
+"try
+"   " We call function TryColors() when BufNewFile.
+"   autocmd BufNewFile *.{c,c++,txt} execute ":call TryColors()"
+"
+"   " We call function TryColors() when BufReadFile.
+"   " Interruption managed here (first test see call Stop() bellow)
+"   autocmd BufRead *.{c,c++,txt} execute "
+"            \:try
+"            \|    call TryColors()
+"            \|catch /.*/
+"            \|    echo \"Stopping due to \" .. v:exception .. \"\n\"
+"            \|    call Stop() 
+"            \|endtry"
+"catch /.*/
+"   echo "errrrrrr"
+"endtry
